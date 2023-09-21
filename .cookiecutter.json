@@ -1,0 +1,15 @@
+{
+  "_output_dir": "/Users/drea/Documents/Projects",
+  "_repo_dir": "/Users/drea/.cookiecutters/cookiecutter-hypermodern-python",
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Andrea Rondon",
+  "copyright_year": "2023",
+  "development_status": "Development Status :: 1 - Planning",
+  "email": "noudedata@gmail.com",
+  "friendly_name": "NLP Newspapers Dashboard",
+  "github_user": "drearondov",
+  "license": "GPL-3.0",
+  "package_name": "nlp_newspapersDashboard",
+  "project_name": "nlp-newspapersDashboard",
+  "version": "0.0.0"
+}
