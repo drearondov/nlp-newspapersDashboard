@@ -1,0 +1,37 @@
+{
+  "name": "nlp-newspapers-dashboard",
+  "version": "0.0.0",
+  "description": "Dashboard for the NLP Headline Analysis project",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --config webpack.config.js",
+    "dev-build": "webpack --progress -d --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress -d --config webpack.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drearondov/nlp-newspapersDashboard.git"
+  },
+  "keywords": [
+    "nlp",
+    "dashboard",
+    "headlines"
+  ],
+  "author": "Andrea Rondón",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/drearondov/nlp-newspapersDashboard/issues"
+  },
+  "homepage": "https://github.com/drearondov/nlp-newspapersDashboard#readme",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

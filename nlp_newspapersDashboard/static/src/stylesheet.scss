@@ -1,0 +1,95 @@
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Brand Variables
+- Bulma Imports
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@800&family=Open+Sans:wght@400;700&display=swap');
+// Colors
+$gruv-blue: #458588;
+$gruv-yellow: #FABD2F;
+$gruv-green: #B8BB26;
+$gruv-grey: #D9DDDD;
+$gruv-grey-medium: #e4e7e7;
+$gruv-grey-light: #FCFCFC;
+$gruv-black: #333333;
+
+// Typography
+$family-sans-serif: "Open Sans", "Helvetica Neue", sans-serif;
+$family-secondary: "Baloo Bhai 2", cursive;
+
+$title-color: $gruv-black;
+
+
+/* Bulma Imports
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/helpers/_all.sass";
+@import "../node_modules/bulma/sass/elements/title.sass";
+
+
+/* Custom Classes
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.tab-container {
+    color: $gruv-grey-light;
+    font-family: $family-secondary;
+    background-color: $gruv-black;
+    border-radius: 25px;
+    padding: 1em;
+}
+
+.tab {
+    background-color: $gruv-black;
+    border-radius: 15px;
+}
+
+.DateRangePickerInput__withBorder {
+    border-radius: 15px;
+}
+
+.DateInput {
+    border-radius: 15px;
+}
+
+.DateInput_input {
+    border-radius: 15px;
+}
+
+.DateInput_input__focused {
+    border-bottom: 0;
+    background-color: $gruv-grey-medium;
+    border-color: $gruv-grey-medium;
+}
+
+.CalendarMonth_caption {
+    font-family: $family-secondary;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+    background-color: $gruv-black;
+    border: $gruv-grey-medium;
+}
+
+.CalendarDay__selected_span {
+    background-color: $gruv-grey-medium;
+    border: $gruv-grey-medium;
+}
+
+.CalendarDay__selected_span:hover {
+    background-color: $gruv-grey;
+    border: $gruv-grey;
+}
+
+.CalendarDay__selected_start {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.CalendarDay__selected_end {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
