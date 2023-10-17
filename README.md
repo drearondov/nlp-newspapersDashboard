@@ -1,7 +1,5 @@
 # NLP Newspapers Dashboard
 
-[![PyPI](https://img.shields.io/pypi/v/nlp-newspapersDashboard.svg)][pypi_]
-[![Status](https://img.shields.io/pypi/status/nlp-newspapersDashboard.svg)][status]
 [![Python Version](https://img.shields.io/pypi/pyversions/nlp-newspapersDashboard)][python version]
 [![License](https://img.shields.io/pypi/l/nlp-newspapersDashboard)][license]
 
@@ -12,8 +10,6 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
-[pypi_]: https://pypi.org/project/nlp-newspapersDashboard/
-[status]: https://pypi.org/project/nlp-newspapersDashboard/
 [python version]: https://pypi.org/project/nlp-newspapersDashboard
 [read the docs]: https://nlp-newspapersDashboard.readthedocs.io/
 [tests]: https://github.com/drearondov/nlp-newspapersDashboard/actions?workflow=Tests
@@ -21,30 +17,15 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
+A dashboard to analyse the history and performance of Newspapers Headlines from Perú. The headlines were pulled from Twitter's API, from Week 29 of 2022 up until Week 9 of 2023 when Twitter's API stopped being free. 
+
 ## Features
 
-- TODO
-
-## Requirements
-
-- TODO
-
-## Installation
-
-You can install _NLP Newspapers Dashboard_ via [pip] from [PyPI]:
-
-```console
-$ pip install nlp-newspapersDashboard
-```
-
-## Usage
-
-Please see the [Command-line Reference] for details.
-
-## Contributing
-
-Contributions are very welcome.
-To learn more, see the [Contributor Guide].
+- Histogram with distribution od tweets posted
+- Main analytic metrics (likes, quotes, replies, retweets)
+- Unique words in relation to number fo tweets
+- See the most used words and their change in time
+- Sentiment Analysis for tweets
 
 ## License
 
@@ -61,10 +42,8 @@ please [file an issue] along with a detailed description.
 This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter] template.
 
 [@cjolowicz]: https://github.com/cjolowicz
-[pypi]: https://pypi.org/
 [hypermodern python cookiecutter]: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 [file an issue]: https://github.com/drearondov/nlp-newspapersDashboard/issues
-[pip]: https://pip.pypa.io/
 
 <!-- github-only -->
 
