@@ -1,11 +1,13 @@
 # NLP Newspapers Dashboard
 
 [![GitHub](https://img.shields.io/github/license/drearondov/nlp-newspapersDashboard?style=for-the-badge)][license]
-[![Tests](https://github.com/drearondov/nlp-newspapersDashboard/workflows/Tests/badge.svg)][tests]
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/drearondov/nlp-newspapersDashboard/tests.yml?event=push&style=for-the-badge&logo=GitHub&logoColor=white&label=testing)][tests]
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)][black]
 
-A dashboard to analyse the history and performance of Newspapers Headlines from Perú. The headlines were pulled from Twitter's API, from Week 29 of 2022 up until Week 9 of 2023.
+A dashboard to analyse the history and performance of Newspapers Headlines from
+Perú. The headlines were pulled from Twitter's API, from Week 29 of 2022 up
+until Week 9 of 2023.
 
 ![Screenshot](docs/static/engagement-metrics-screenshot.png)
 
@@ -29,7 +31,8 @@ please [file an issue] along with a detailed description.
 
 ## Credits
 
-This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter] template.
+This project was generated from [@cjolowicz]'s [Hypermodern Python Cookiecutter]
+template.
 
 <!-- github-only -->
 
