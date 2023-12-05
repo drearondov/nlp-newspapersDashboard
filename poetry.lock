@@ -2205,13 +2205,13 @@ test = ["coverage[toml] (>=7)", "mypy (>=1.2.0)", "pytest (>=7)"]
 
 [[package]]
 name = "types-awscrt"
-version = "0.19.3"
+version = "0.19.19"
 description = "Type annotations and code completion for awscrt"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "types_awscrt-0.19.3-py3-none-any.whl", hash = "sha256:7b55f5a12ccd4407bc8f1e35c69bb40c931f8513ce1ad81a4527fce3989003fd"},
-    {file = "types_awscrt-0.19.3.tar.gz", hash = "sha256:9a21caac4287c113dd52665707785c45bb1d3242b7a2b8aeb57c49e9e749a330"},
+    {file = "types_awscrt-0.19.19-py3-none-any.whl", hash = "sha256:a577c4d60a7fb7e21b436a73207a66f6ba50329d578b347934c5d99d4d612901"},
+    {file = "types_awscrt-0.19.19.tar.gz", hash = "sha256:850d5ad95d8f337b15fb154790f39af077faf5c08d43758fd750f379a87d5f73"},
 ]
 
 [[package]]
