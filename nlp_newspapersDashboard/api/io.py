@@ -18,7 +18,11 @@ def compile_data_frame(
     graph_data = []
 
     for timestamp in timestamps:
-        data_path = Path(f"static/data/{data_frame_type}-{tuple(timestamp)}.feather")
+        data_path = Path(
+            f"nlp_newspapersDashboard/data/{data_frame_type}/{data_frame_type}-{tuple(timestamp)}.feather"
+        ).resolve()
+
+        # logger.debug(data_path)
 
         if not data_path.exists():
             continue

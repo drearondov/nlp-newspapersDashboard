@@ -1,19 +1,20 @@
-import logging
-import pandas as pd
 import plotly.io as pio
-import sys
 
 from dash import Dash, Input, Output, dcc, html, get_asset_url
 from datetime import date
 from datetime import timedelta
+from loguru import logger
 
-from controllers.io import compile_data_frame
-from controllers.number_tweets import create_number_tweets_graphic
+from api.io import compile_data_frame
+from api.number_tweets import create_number_tweets_graphic
+from api.engagement_metrics import (
+    create_stats_summary,
+    create_engagement_metrics_graphic,
+    create_stats_ratios,
+    create_stats_table,
+)
+from api.top_30_words import create_top_30_graph
 
-pd.set_option("display.max_colwidth", 300)
-pd.set_option("display.max_rows", 25)
-pd.set_option("display.precision", 2)
-pd.set_option("display.float_format", "{:,.2f}".format)
 
 pio.templates.default = "none"
 
@@ -26,12 +27,6 @@ gruvbox_colors = [
     "#8EC07C",
     "#FE8019",
 ]
-
-log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-
-logging.basicConfig(stream=sys.stdout, format=log_format, level=logging.INFO)
-
-logger = logging.getLogger()
 
 
 app = Dash(__name__, assets_folder="static/dist")
@@ -55,11 +50,12 @@ app.layout = html.Div(
                             style={"gap": "1em"},
                             children=[
                                 html.Img(
-                                    src=get_asset_url("nlp-newspaperDashboard.svg")
+                                    src=get_asset_url("nlp-newspaperDashboard.svg"),
+                                    width=36,
                                 ),
                                 html.H1(
                                     "Headline Newspaper Analysis",
-                                    className="title is-family-secondary",
+                                    className="title is-2 is-family-secondary",
                                 ),
                             ],
                         ),
@@ -106,7 +102,7 @@ app.layout = html.Div(
                     ]
                 ),
                 dcc.Tabs(
-                    id="tabs",
+                    id="api",
                     value="number-tweets",
                     parent_className="is-flex-grow-2",
                     style={"padding": "0.5em"},
@@ -137,7 +133,7 @@ app.layout = html.Div(
 def get_timestamps(
     start_date: str, end_date: str, frequency: str
 ) -> list[tuple[int, int]]:
-    """Converts the selected values from the app into a list of timestamps to load data
+    """Converts the selected values from the app into a list of timestamps to load data.
 
     Args:
         start_date (str): Start date selected by the user
@@ -148,9 +144,6 @@ def get_timestamps(
         List: Tuples with the form (year, week)
     """
     time_stamps = []
-
-    logger.info(f"Start Date: {start_date}")
-    logger.info(f"End Date: {end_date}")
 
     if start_date is not None:
         start_date_object = date.fromisoformat(start_date)
@@ -188,10 +181,10 @@ def get_timestamps(
 @app.callback(
     Output("tab-content", "children"),
     Input("timestamps-store", "data"),
-    Input("tabs", "value"),
+    Input("api", "value"),
 )
-def tabs_handler(timestamps: list[tuple[int, int]], tab_selection: str) -> html.Div:
-    """Gets the current selection and returns a div with the graphics necesaries
+def api_handler(timestamps: list[tuple[int, int]], tab_selection: str) -> html.Div:
+    """Gets the current selection and returns a div with the graphics necesaries.
 
     Args:
         timestamps (list[tuple[int, int]]): List of timestamps selected
@@ -215,11 +208,93 @@ def tabs_handler(timestamps: list[tuple[int, int]], tab_selection: str) -> html.
                 ]
             )
         case "engagement-metrics":
-            pass
+            stats_data = compile_data_frame(timestamps, "data_clean")
+            stats_summary = create_stats_summary(stats_data)
+            stats_ratios = create_stats_ratios(stats_data)
+
+            return html.Div(
+                children=[
+                    dcc.Graph(
+                        id="engagement-metrics-graph",
+                        figure=create_engagement_metrics_graphic(
+                            stats_summary, gruvbox_colors, timestamps
+                        ),
+                    ),
+                    html.H2(
+                        "Stats & Ratios",
+                        className="title is-4 mt-5 is-family-secondary",
+                    ),
+                    create_stats_table(stats_ratios),
+                ]
+            )
         case "top-30-words":
-            pass
+            corpus_data = compile_data_frame(timestamps, "corpus")
+            top30 = compile_data_frame(timestamps, "top30")
+
+            return html.Div(
+                className="is-flex",
+                children=[
+                    dcc.Graph(
+                        className="is-flex-grow-3",
+                        id="top-30-words-graph",
+                        figure=create_top_30_graph(top30, gruvbox_colors, timestamps),
+                    ),
+                    html.Div(
+                        children=[
+                            html.H3(
+                                children=["Add new topic"],
+                                className="title is-5 is-family-secondary",
+                            ),
+                            html.Div(
+                                children=[
+                                    dcc.Input(
+                                        id="top30-new-topic",
+                                        type="text",
+                                        placeholder="New topic",
+                                        debounce=True,
+                                    ),
+                                    dcc.Input(
+                                        id="top30-input-words",
+                                        type="text",
+                                        placeholder="Words to be added to hot topic (separate with commas)",
+                                        debounce=True,
+                                    ),
+                                ]
+                            ),
+                            html.H3(
+                                children=["Current topics"],
+                                className="title is-5 is-family-secondary",
+                            ),
+                            html.Div(id="current-topics", className="tags"),
+                        ],
+                    ),
+                ],
+            )
         case "sentiment-analysis":
-            pass
+            pass  # TODO: Sentiment Analysis api
+
+
+@app.callback(
+    Output("current-topics", "children"),
+    Input("current-topics", "children"),
+    Input("top30-new-topic", "text"),
+    Input("top30-new-topic-words", "text"),
+)
+def update_tracked_topics(
+    current_topics: list[html.Span], top30_new_topic: str, top30_new_topic_words: str
+) -> list[html.Span]:
+    """Gets the current list of tracked topics and stores it.
+
+    Args:
+        current_topics (list[html.Span]): Current list of topics tracked
+        top30_new_topic (str): New topics to track
+        top30_new_topic_words (str): Words belonging to the topic
+
+    Returns:
+        list[html.Span]: An updated list of the topics
+    """
+    current_topics.append(html.Span(top30_new_topic, className="tag"))
+    pass
 
 
 if __name__ == "__main__":
